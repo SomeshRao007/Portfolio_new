@@ -63,22 +63,25 @@ const Hero: React.FC = () => {
               </a>
             ))}
           </div>
-          <div className="mt-8 flex justify-center md:justify-start items-center space-x-4">
-              <ExpandableButton
-                href={CV_URL}
-                icon={<ArrowDownTrayIcon className="w-6 h-6 text-blue-600" />}
-                text="Download CV"
-                download
-              />
-              <ExpandableButton
-                href="#testimonials"
-                icon={<ChatBubbleLeftRightIcon className="w-6 h-6 text-blue-600" />}
-                text="Testimonials"
-              />
-          </div>
-           <div className="mt-16 text-center md:text-left">
-            <p className="text-lg font-telugu text-slate-700">మీరు పోరాడకపోతే, మీరు గెలవలేరు.</p>
-            <p className="text-md text-slate-500 italic mt-1">"If you don't fight, you can't win."</p>
+          
+          <div className="mt-16 flex flex-col md:flex-row items-center justify-center md:justify-between">
+            <div className="text-center md:text-left">
+              <p className="text-lg font-telugu text-slate-700">మీరు పోరాడకపోతే, మీరు గెలవలేరు.</p>
+              <p className="text-md text-slate-500 italic mt-1">"If you don't fight, you can't win."</p>
+            </div>
+            <div className="mt-8 md:mt-0 flex items-center space-x-4">
+                <ExpandableButton
+                  href={CV_URL}
+                  icon={<ArrowDownTrayIcon className="w-6 h-6 text-blue-600" />}
+                  text="Download CV"
+                  download
+                />
+                <ExpandableButton
+                  href="#testimonials"
+                  icon={<ChatBubbleLeftRightIcon className="w-6 h-6 text-blue-600" />}
+                  text="Testimonials"
+                />
+            </div>
           </div>
         </div>
       </div>
