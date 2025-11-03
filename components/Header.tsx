@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { PERSONAL_INFO } from '../constants';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { currentUser, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,13 +22,13 @@ const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { href: '#home', label: 'Home' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#timeline', label: 'Timeline' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#learning', label: 'Learning' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/', label: 'Home' },
+    { href: '/#skills', label: 'Skills' },
+    { href: '/#timeline', label: 'Timeline' },
+    { href: '/#projects', label: 'Projects' },
+    { href: '/#testimonials', label: 'Testimonials' },
+    { href: '/#learning', label: 'Learning' },
+    { href: '/#contact', label: 'Contact' },
   ];
 
   return (
@@ -37,9 +40,9 @@ const Header: React.FC = () => {
       >
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex justify-between items-center h-20">
-            <a href="#home" className="text-2xl font-bold text-blue-600">
+            <Link to="/" className="text-2xl font-bold text-blue-600">
               {PERSONAL_INFO.name}
-            </a>
+            </Link>
             <nav className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <a
@@ -50,6 +53,21 @@ const Header: React.FC = () => {
                   {link.label}
                 </a>
               ))}
+               {currentUser ? (
+                <button
+                  onClick={logout}
+                  className="px-4 py-2 font-semibold text-white bg-red-600 rounded-md hover:bg-red-700"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="px-4 py-2 font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700"
+                >
+                  Admin Login
+                </Link>
+              )}
             </nav>
             <div className="md:hidden">
                 <button
@@ -89,6 +107,25 @@ const Header: React.FC = () => {
                         {link.label}
                       </a>
                     ))}
+                     {currentUser ? (
+                      <button
+                        onClick={() => {
+                          logout();
+                          setIsMenuOpen(false);
+                        }}
+                        className="text-2xl text-slate-700 hover:text-blue-600 font-semibold transition-colors"
+                      >
+                        Logout
+                      </button>
+                    ) : (
+                      <Link
+                        to="/login"
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-2xl text-slate-700 hover:text-blue-600 font-semibold transition-colors"
+                      >
+                        Admin Login
+                      </Link>
+                    )}
                 </nav>
             </div>
         </div>
