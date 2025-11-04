@@ -66,7 +66,7 @@ const Stats: React.FC<StatsProps> = ({ data }) => {
   return (
     <section className="my-20 md:my-24">
       <div className="relative bg-fixed bg-cover bg-center rounded-2xl shadow-lg" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')" }}>
-        <div className="absolute inset-0 bg-black/60 rounded-2xl"></div>
+        <div className="absolute inset-0 bg-slate-900/50 dark:bg-black/70 rounded-2xl"></div>
         <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center p-8 md:p-16">
           {data.map((stat) => (
             <div key={stat.label} className="flex flex-col items-center">
