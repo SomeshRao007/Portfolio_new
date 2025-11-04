@@ -12,7 +12,10 @@ type StatsProps = {
 const CountUp: React.FC<{ end: number }> = ({ end }) => {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const animationFrameRef = useRef<number>();
+  // Fix: Initialize useRef with a value (null) and update the type to allow null.
+  // This resolves the error "Expected 1 arguments, but got 0" because useRef<T>() with a generic
+  // type requires an initial value if T cannot be undefined.
+  const animationFrameRef = useRef<number | null>(null);
 
   const easeOutExpo = (t: number) => {
     return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);

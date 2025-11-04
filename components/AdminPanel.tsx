@@ -27,30 +27,8 @@ const AdminSection: React.FC<{ title: string; children: React.ReactNode }> = ({ 
   );
 };
 
-const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
-    });
-};
-
 const AdminPanel: React.FC<AdminPanelProps> = ({ data, setData, onLogout }) => {
     const [isSaving, setIsSaving] = useState(false);
-
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>, callback: (dataUrl: string) => void) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            try {
-                const dataUrl = await fileToBase64(file);
-                callback(dataUrl);
-            } catch (error) {
-                console.error("Error converting file to Base64", error);
-                alert("Failed to upload file.");
-            }
-        }
-    }
 
     const handlePersonalInfoChange = (field: keyof typeof data.personalInfo, value: any) => {
         setData(prev => ({...prev, personalInfo: {...prev.personalInfo, [field]: value}}));
@@ -160,14 +138,14 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, setData, onLogout }) => {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label className="block text-sm font-medium text-slate-700">Profile Image</label>
-                            <input type="file" accept="image/*" onChange={e => handleFileChange(e, url => handlePersonalInfoChange('profileImageUrl', url))} className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+                            <label className="block text-sm font-medium text-slate-700">Profile Image Path</label>
+                            <input type="text" value={data.personalInfo.profileImageUrl} onChange={e => handlePersonalInfoChange('profileImageUrl', e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 shadow-sm"/>
                             {data.personalInfo.profileImageUrl && <img src={data.personalInfo.profileImageUrl} alt="Profile preview" className="mt-2 h-24 w-24 rounded-full object-cover"/>}
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-slate-700">CV Document</label>
-                             <input type="file" onChange={e => handleFileChange(e, url => handlePersonalInfoChange('cvUrl', url))} className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
-                             {data.personalInfo.cvUrl && <a href={data.personalInfo.cvUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline mt-2 inline-block">View Uploaded CV</a>}
+                            <label className="block text-sm font-medium text-slate-700">CV Path</label>
+                             <input type="text" value={data.personalInfo.cvUrl} onChange={e => handlePersonalInfoChange('cvUrl', e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 shadow-sm"/>
+                             {data.personalInfo.cvUrl && <a href={data.personalInfo.cvUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline mt-2 inline-block">View CV</a>}
                         </div>
                     </div>
                     
@@ -193,11 +171,8 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, setData, onLogout }) => {
                         <div className="space-y-2">
                             {category.skills.map((skill, skillIndex) => (
                                 <div key={skillIndex} className="flex items-center space-x-2">
-                                    <input type="text" value={skill.name} onChange={e => handleSkillChange(catIndex, skillIndex, 'name', e.target.value)} className="flex-grow rounded-md border-slate-300 shadow-sm"/>
-                                    <label className="flex items-center p-2 bg-white border border-slate-300 rounded-md cursor-pointer hover:bg-slate-50">
-                                        <ArrowUpOnSquareIcon className="w-5 h-5 text-slate-600"/>
-                                        <input type="file" accept="image/*" className="hidden" onChange={e => handleFileChange(e, url => handleSkillChange(catIndex, skillIndex, 'icon', url))} />
-                                    </label>
+                                    <input type="text" value={skill.name} onChange={e => handleSkillChange(catIndex, skillIndex, 'name', e.target.value)} placeholder="Skill Name" className="flex-grow rounded-md border-slate-300 shadow-sm"/>
+                                    <input type="text" value={skill.icon} onChange={e => handleSkillChange(catIndex, skillIndex, 'icon', e.target.value)} placeholder="Icon path (e.g., /assets/icons/icon.png)" className="flex-grow rounded-md border-slate-300 shadow-sm w-1/2"/>
                                     {skill.icon && <img src={skill.icon} alt="icon" className="h-8 w-8 object-contain"/>}
                                     <button onClick={() => removeSkillFromCategory(catIndex, skillIndex)} className="p-2 bg-red-200 text-red-800 rounded-md hover:bg-red-300"><TrashIcon className="w-4 h-4"/></button>
                                 </div>
@@ -223,14 +198,24 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ data, setData, onLogout }) => {
                                 {Object.keys(item).map(field => (
                                      <div key={field}>
                                         <label className="capitalize block text-sm font-medium text-slate-700">{field.replace(/([A-Z])/g, ' $1')}</label>
-                                        {field.toLowerCase().includes('url') && !field.toLowerCase().includes('github') ?
-                                            <div className="flex items-center space-x-2">
-                                                <input type="file" accept="image/*" className="mt-1 block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" onChange={e => handleFileChange(e, url => handleItemChange(key as keyof typeof data, index, field, url))}/>
-                                                {item[field] && <img src={item[field]} alt="preview" className="h-16 w-16 object-cover rounded-md"/>}
-                                            </div>
-                                            :
-                                            <input type="text" value={item[field]} onChange={e => handleItemChange(key as keyof typeof data, index, field, e.target.value)} className="mt-1 block w-full rounded-md border-slate-300 shadow-sm"/>
-                                        }
+                                        {field.toLowerCase().includes('description') || field.toLowerCase().includes('quote') ? (
+                                            <textarea
+                                                value={item[field]}
+                                                onChange={e => handleItemChange(key as keyof typeof data, index, field, e.target.value)}
+                                                rows={3}
+                                                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm"
+                                            />
+                                        ) : (
+                                            <input
+                                                type={field.toLowerCase().includes('date') ? 'date' : 'text'}
+                                                value={item[field]}
+                                                onChange={e => handleItemChange(key as keyof typeof data, index, field, e.target.value)}
+                                                className="mt-1 block w-full rounded-md border-slate-300 shadow-sm"
+                                            />
+                                        )}
+                                        {field.toLowerCase().includes('imageurl') && item[field] && (
+                                            <img src={item[field]} alt="preview" className="mt-2 h-16 w-16 object-cover rounded-md" />
+                                        )}
                                     </div>
                                 ))}
                                  <button onClick={() => removeItem(key as keyof typeof data, index)} className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600"><TrashIcon className="w-5 h-5"/></button>

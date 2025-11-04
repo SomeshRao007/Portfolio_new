@@ -7,12 +7,12 @@ import type { Skill, SkillCategory, Certification, TimelineEvent, LearningItem, 
 const PERSONAL_INFO = {
   name: "Somesh Rao",
   title: "Senior Frontend Engineer & AI Enthusiast",
-  profileImageUrl: "https://i.imgur.com/8QZQY5D.png",
+  profileImageUrl: "/assets/images/flag.jpeg",
   bio: `I'm a passionate Senior Frontend Engineer with a deep expertise in building beautiful, performant, and accessible user interfaces. I specialize in the React ecosystem and have a keen interest in leveraging AI, like Google's Gemini, to create innovative web experiences. My goal is to bridge the gap between complex technology and intuitive design.`,
   socialLinks: [
-    { name: 'GitHub', url: 'https://github.com', icon: (props: {className?: string}) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg> },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: (props: {className?: string}) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 1 1 8.25 6.5 1.75 1.75 0 0 1 6.5 8.25zM19 19h-3v-4.75c0-1.4-1.2-2.5-2.5-2.5S11 12.85 11 14.25V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.6-1.4c2.5 0 4.5 2.2 4.5 5.05V19z"/></svg> },
-    { name: 'Twitter', url: 'https://twitter.com', icon: (props: {className?: string}) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M16 3.539a6.839 6.839 0 0 1-1.95.535A3.42 3.42 0 0 0 15.58.74a6.884 6.884 0 0 1-2.156.824A3.423 3.423 0 0 0 7.6 3.45a3.422 3.422 0 0 0 .083.823A9.71 9.71 0 0 1 1.06.73a3.425 3.425 0 0 0 1.06 4.572A3.394 3.394 0 0 1 .56 4.9v.043a3.424 3.424 0 0 0 2.744 3.354 3.423 3.423 0 0 1-1.54.058A3.427 3.427 0 0 0 4.9 10.6a6.864 6.864 0 0 1-4.256 1.465A6.8 6.8 0 0 1 0 12.001a9.664 9.664 0 0 0 5.23 1.536c6.276 0 9.71-5.204 9.71-9.71 0-.148 0-.295-.01-.442A6.95 6.95 0 0 0 16 3.539z"/></svg> },
+    { name: 'GitHub', url: 'https://github.com', icon: '/assets/icons/tiger.png' },
+    { name: 'LinkedIn', url: 'https://linkedin.com', icon: '/assets/icons/tiger.png' },
+    { name: 'Twitter', url: 'https://twitter.com', icon: '/assets/icons/tiger.png' },
   ],
   formspreeEndpoint: "https://formspree.io/f/your_form_id",
   cvUrl: "", // This will be populated by a data URL from file upload
@@ -22,41 +22,60 @@ const SKILLS_DATA: SkillCategory[] = [
     {
         name: 'Cloud Platform',
         skills: [
-            { name: 'AWS', icon: '' }, { name: 'OVH', icon: '' }, { name: 'Google Cloud Platform', icon: '' },
-            { name: 'Digital Ocean', icon: '' }, { name: 'Azure', icon: '' }, { name: 'Linode', icon: '' }
+            { name: 'AWS', icon: '/assets/icons/tiger.png' },
+            { name: 'OVH', icon: '/assets/icons/tiger.png' },
+            { name: 'Google Cloud Platform', icon: '/assets/icons/tiger.png' },
+            { name: 'Digital Ocean', icon: '/assets/icons/tiger.png' },
+            { name: 'Azure', icon: '/assets/icons/tiger.png' },
+            { name: 'Linode', icon: '/assets/icons/tiger.png' }
         ]
     },
     {
         name: 'DevOps',
         skills: [
-            { name: 'Docker', icon: '' }, { name: 'Kubernetes', icon: '' }, { name: 'Terraform', icon: '' },
-            { name: 'Jenkins', icon: '' }, { name: 'Nginx', icon: '' }, { name: 'Git', icon: '' }
+            { name: 'Docker', icon: '/assets/icons/tiger.png' },
+            { name: 'Kubernetes', icon: '/assets/icons/tiger.png' },
+            { name: 'Terraform', icon: '/assets/icons/tiger.png' },
+            { name: 'Jenkins', icon: '/assets/icons/tiger.png' },
+            { name: 'Nginx', icon: '/assets/icons/tiger.png' },
+            { name: 'Git', icon: '/assets/icons/tiger.png' }
         ]
     },
     {
         name: 'Monitoring',
         skills: [
-            { name: 'Prometheus', icon: '' }, { name: 'Grafana', icon: '' }
+            { name: 'Prometheus', icon: '/assets/icons/tiger.png' },
+            { name: 'Grafana', icon: '/assets/icons/tiger.png' }
         ]
     },
     {
         name: 'AI/ML',
         skills: [
-            { name: 'PyTorch', icon: '' }, { name: 'Scikit-learn', icon: '' }
+            { name: 'PyTorch', icon: '/assets/icons/tiger.png' },
+            { name: 'Scikit-learn', icon: '/assets/icons/tiger.png' }
         ]
     },
     {
         name: 'Web Development',
         skills: [
-            { name: 'React', icon: '' }, { name: 'Next.js', icon: '' }, { name: 'Node.js', icon: '' },
-            { name: 'Tailwind CSS', icon: '' }, { name: 'Vite', icon: '' }, { name: 'Figma', icon: '' }
+            { name: 'React', icon: '/assets/icons/tiger.png' },
+            { name: 'Next.js', icon: '/assets/icons/tiger.png' },
+            { name: 'Node.js', icon: '/assets/icons/tiger.png' },
+            { name: 'Tailwind CSS', icon: '/assets/icons/tiger.png' },
+            { name: 'Vite', icon: '/assets/icons/tiger.png' },
+            { name: 'Figma', icon: '/assets/icons/tiger.png' }
         ]
     },
     {
         name: 'Programming & Databases',
         skills: [
-            { name: 'TypeScript', icon: '' }, { name: 'JavaScript', icon: '' }, { name: 'Python', icon: '' },
-            { name: 'HTML5', icon: '' }, { name: 'CSS3', icon: '' }, { name: 'PostgreSQL', icon: '' }, { name: 'Bash', icon: '' }
+            { name: 'TypeScript', icon: '/assets/icons/tiger.png' },
+            { name: 'JavaScript', icon: '/assets/icons/tiger.png' },
+            { name: 'Python', icon: '/assets/icons/tiger.png' },
+            { name: 'HTML5', icon: '/assets/icons/tiger.png' },
+            { name: 'CSS3', icon: '/assets/icons/tiger.png' },
+            { name: 'PostgreSQL', icon: '/assets/icons/tiger.png' },
+            { name: 'Bash', icon: '/assets/icons/tiger.png' }
         ]
     }
 ];
@@ -65,37 +84,37 @@ const CERTIFICATIONS_DATA: Certification[] = [
   {
     title: 'Google Cloud Certified - Professional Cloud Developer',
     issuer: 'Google Cloud',
-    imageUrl: 'https://picsum.photos/seed/cert1/600/400',
+    imageUrl: '/assets/images/flag.jpeg',
     link: '#',
   },
   {
     title: 'Advanced React and GraphQL',
     issuer: 'Wes Bos',
-    imageUrl: 'https://picsum.photos/seed/cert2/600/400',
+    imageUrl: '/assets/images/flag.jpeg',
     link: '#',
   },
   {
     title: 'TypeScript: The Complete Developer\'s Guide',
     issuer: 'Stephen Grider',
-    imageUrl: 'https://picsum.photos/seed/cert3/600/400',
+    imageUrl: '/assets/images/flag.jpeg',
     link: '#',
   },
   {
     title: 'Certified Kubernetes Application Developer (CKAD)',
     issuer: 'The Linux Foundation',
-    imageUrl: 'https://picsum.photos/seed/cert4/600/400',
+    imageUrl: '/assets/images/flag.jpeg',
     link: '#',
   },
     {
     title: 'AWS Certified Solutions Architect',
     issuer: 'Amazon Web Services',
-    imageUrl: 'https://picsum.photos/seed/cert5/600/400',
+    imageUrl: '/assets/images/flag.jpeg',
     link: '#',
   },
   {
     title: 'Terraform Associate Certification',
     issuer: 'HashiCorp',
-    imageUrl: 'https://picsum.photos/seed/cert6/600/400',
+    imageUrl: '/assets/images/flag.jpeg',
     link: '#',
   },
 ];
@@ -141,19 +160,19 @@ const PROJECTS_DATA: Project[] = [
   {
     title: 'AI Story Generator',
     description: 'A web app that uses Gemini to generate short stories based on user prompts.',
-    imageUrl: 'https://picsum.photos/seed/proj1/1000/800',
+    imageUrl: '/assets/images/flag.jpeg',
     githubUrl: '#',
   },
   {
     title: 'E-commerce Design System',
     description: 'A complete component library built with React and Tailwind CSS for a large-scale e-commerce platform.',
-    imageUrl: 'https://picsum.photos/seed/proj2/1000/800',
+    imageUrl: '/assets/images/flag.jpeg',
     githubUrl: '#',
   },
   {
     title: 'Data Visualization Dashboard',
     description: 'An internal tool for visualizing complex business metrics using D3.js and React.',
-    imageUrl: 'https://picsum.photos/seed/proj3/1000/800',
+    imageUrl: '/assets/images/flag.jpeg',
     githubUrl: '#',
   },
 ];

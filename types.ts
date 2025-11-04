@@ -6,7 +6,7 @@ import type { ComponentType } from 'react';
 
 export interface Skill {
   name: string;
-  icon: string; // Will now store a base64 data URL for uploaded images
+  icon: string; // Path to the icon image file
 }
 
 export interface SkillCategory {

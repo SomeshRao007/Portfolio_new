@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon, Cog6ToothIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 type HeaderProps = {
   name: string;
-  isAuthenticated: boolean;
-  onLogout: () => void;
-}
+};
 
-const Header: React.FC<HeaderProps> = ({ name, isAuthenticated, onLogout }) => {
+const Header: React.FC<HeaderProps> = ({ name }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -56,24 +54,6 @@ const Header: React.FC<HeaderProps> = ({ name, isAuthenticated, onLogout }) => {
                   {link.label}
                 </a>
               ))}
-               <div className="h-6 w-px bg-slate-300" />
-              {isAuthenticated ? (
-                  <>
-                     <a href="#admin" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 font-medium transition-colors">
-                        <Cog6ToothIcon className="w-5 h-5"/>
-                        <span>Admin Panel</span>
-                    </a>
-                    <button onClick={onLogout} className="flex items-center space-x-2 text-slate-600 hover:text-red-600 font-medium transition-colors">
-                        <ArrowRightOnRectangleIcon className="w-5 h-5" />
-                        <span>Logout</span>
-                    </button>
-                  </>
-              ) : (
-                <a href="#login" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 font-medium transition-colors">
-                    <UserCircleIcon className="w-5 h-5"/>
-                    <span>Admin Login</span>
-                </a>
-              )}
             </nav>
             <div className="md:hidden">
                 <button

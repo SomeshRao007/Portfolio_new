@@ -7,7 +7,7 @@ type HeroProps = {
     title: string;
     profileImageUrl: string;
     bio: string;
-    socialLinks: { name: string; url: string; icon: React.FC<{className?: string}> }[];
+    socialLinks: { name: string; url: string; icon: string }[];
     cvUrl: string;
   };
 };
@@ -66,9 +66,9 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.name}
-                className="text-slate-500 hover:text-blue-600 transition-colors"
+                className="hover:opacity-75 transition-opacity"
               >
-                <link.icon className="w-8 h-8" />
+                <img src={link.icon} alt={link.name} className="w-8 h-8" />
               </a>
             ))}
           </div>
