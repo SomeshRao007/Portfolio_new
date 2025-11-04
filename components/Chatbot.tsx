@@ -1,11 +1,13 @@
-
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { GoogleGenAI, Chat } from '@google/genai';
 import type { ChatMessage } from '../types';
-import { CHATBOT_SYSTEM_INSTRUCTION } from '../constants';
 import { PaperAirplaneIcon, XMarkIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/solid';
 
-const Chatbot: React.FC = () => {
+type ChatbotProps = {
+  systemInstruction: string;
+};
+
+const Chatbot: React.FC<ChatbotProps> = ({ systemInstruction }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [chat, setChat] = useState<Chat | null>(null);
   const [history, setHistory] = useState<ChatMessage[]>([]);
@@ -13,31 +15,33 @@ const Chatbot: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  const initChat = useCallback(() => {
+    try {
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+      const chatInstance = ai.chats.create({
+        model: 'gemini-2.5-flash',
+        config: {
+          systemInstruction: systemInstruction,
+        },
+      });
+      setChat(chatInstance);
+      setHistory([
+        { role: 'model', text: "Hello! I'm Portfolio Pal. Ask me anything about this person's skills, experience, or projects." }
+      ]);
+    } catch (error) {
+      console.error("Failed to initialize Gemini:", error);
+      setHistory([
+        { role: 'model', text: "Sorry, I'm having trouble connecting right now. Please try again later." }
+      ]);
+    }
+  }, [systemInstruction]);
+
   useEffect(() => {
-    const initChat = () => {
-      try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-        const chatInstance = ai.chats.create({
-          model: 'gemini-2.5-flash',
-          config: {
-            systemInstruction: CHATBOT_SYSTEM_INSTRUCTION,
-          },
-        });
-        setChat(chatInstance);
-        setHistory([
-          { role: 'model', text: "Hello! I'm Portfolio Pal. Ask me anything about this person's skills, experience, or projects." }
-        ]);
-      } catch (error) {
-        console.error("Failed to initialize Gemini:", error);
-        setHistory([
-          { role: 'model', text: "Sorry, I'm having trouble connecting right now. Please try again later." }
-        ]);
-      }
-    };
-    if (isOpen && !chat) {
+    if (isOpen) {
       initChat();
     }
-  }, [isOpen, chat]);
+  }, [isOpen, initChat]);
+
 
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -116,12 +120,12 @@ const Chatbot: React.FC = () => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
                 className="flex-1 px-4 py-2 border border-slate-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                disabled={isLoading}
+                disabled={isLoading || !chat}
               />
               <button
                 type="submit"
                 className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors"
-                disabled={isLoading || !input.trim()}
+                disabled={isLoading || !input.trim() || !chat}
               >
                 <PaperAirplaneIcon className="w-5 h-5" />
               </button>

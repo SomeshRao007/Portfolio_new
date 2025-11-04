@@ -1,8 +1,12 @@
 import React from 'react';
-import { TESTIMONIALS_DATA } from '../constants';
+import type { Testimonial } from '../types';
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid';
 
-const Testimonials: React.FC = () => {
+type TestimonialsProps = {
+  data: Testimonial[];
+};
+
+const Testimonials: React.FC<TestimonialsProps> = ({ data }) => {
   return (
     <section className="py-20 md:py-24 bg-slate-100/50 rounded-2xl">
       <div className="container mx-auto px-4">
@@ -12,7 +16,7 @@ const Testimonials: React.FC = () => {
           <p className="mt-4 text-lg text-slate-600">Feedback from people I've worked with.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {TESTIMONIALS_DATA.map((testimonial) => (
+          {data.map((testimonial) => (
             <div
               key={testimonial.author}
               className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col"

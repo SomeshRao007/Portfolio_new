@@ -1,8 +1,12 @@
 import React from 'react';
-import { PROJECTS_DATA } from '../constants';
-import { CodeBracketIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import type { Project } from '../types';
+import { CodeBracketIcon } from '@heroicons/react/24/outline';
 
-const Projects: React.FC = () => {
+type ProjectsProps = {
+  data: Project[];
+};
+
+const Projects: React.FC<ProjectsProps> = ({ data }) => {
   return (
     <section className="py-20 md:py-24 bg-white rounded-2xl shadow-sm">
       <div className="text-center mb-16">
@@ -10,7 +14,7 @@ const Projects: React.FC = () => {
         <p className="mt-4 text-lg text-slate-600">A selection of projects I've built.</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {PROJECTS_DATA.map((project) => (
+        {data.map((project) => (
           <div key={project.title} className="group flex flex-col bg-slate-50 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden">
             <div className="relative aspect-w-16 aspect-h-9 overflow-hidden">
               <img
@@ -29,12 +33,6 @@ const Projects: React.FC = () => {
                   <CodeBracketIcon className="w-4 h-4" />
                   <span>Code</span>
                 </a>
-                {project.liveUrl && (
-                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors text-sm">
-                      <ArrowTopRightOnSquareIcon className="w-4 h-4" />
-                      <span>Live Demo</span>
-                   </a>
-                )}
               </div>
             </div>
           </div>

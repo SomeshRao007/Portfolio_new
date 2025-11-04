@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { SKILLS_DATA } from '../constants';
 import { SkillCategory } from '../types';
 
-const Skills: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<SkillCategory>(SkillCategory.CLOUD);
+type SkillsProps = {
+  data: SkillCategory[];
+};
 
-  const categories = Object.values(SkillCategory);
-  const filteredSkills = SKILLS_DATA.filter(skill => skill.category === activeCategory);
+const Skills: React.FC<SkillsProps> = ({ data }) => {
+  // Set initial active category to the first one available, if any.
+  const [activeCategory, setActiveCategory] = useState<string | null>(data.length > 0 ? data[0].name : null);
+
+  const categories = data.map(cat => cat.name);
+  const filteredSkills = data.find(cat => cat.name === activeCategory)?.skills || [];
 
   return (
     <section className="py-20 md:py-24 bg-slate-100/50 rounded-2xl">
@@ -34,15 +38,21 @@ const Skills: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8">
-          {filteredSkills.map((skill) => (
-            <div
-              key={skill.name}
-              className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-            >
-              <skill.icon className="h-10 w-10 md:h-12 md:w-12 mb-4 text-slate-700" />
-              <span className="font-semibold text-sm md:text-base text-slate-800">{skill.name}</span>
-            </div>
-          ))}
+          {filteredSkills.map((skill) => {
+            return (
+              <div
+                key={skill.name}
+                className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                {skill.icon ? (
+                  <img src={skill.icon} alt={`${skill.name} icon`} className="h-10 w-10 md:h-12 md:w-12 mb-4 object-contain" />
+                ) : (
+                  <div className="h-10 w-10 md:h-12 md:w-12 mb-4 bg-slate-200 rounded-full"></div>
+                )}
+                <span className="font-semibold text-sm md:text-base text-slate-800">{skill.name}</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

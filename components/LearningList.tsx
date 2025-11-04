@@ -1,7 +1,11 @@
 import React from 'react';
-import { LEARNING_DATA } from '../constants';
+import type { LearningItem } from '../types';
 
-const LearningList: React.FC = () => {
+type LearningListProps = {
+  data: LearningItem[];
+};
+
+const LearningList: React.FC<LearningListProps> = ({ data }) => {
   return (
     <section className="py-20 md:py-24">
       <div className="text-center mb-16">
@@ -10,7 +14,7 @@ const LearningList: React.FC = () => {
         <p className="mt-4 text-lg text-slate-600">My current focus is on these exciting technologies.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {LEARNING_DATA.map((item) => (
+        {data.map((item) => (
           <div
             key={item.title}
             className="group bg-white rounded-2xl p-6 shadow-md hover:shadow-xl hover:-translate-y-2 border-l-4 border-transparent hover:border-blue-500 transition-all duration-300"

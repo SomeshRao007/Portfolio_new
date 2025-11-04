@@ -1,7 +1,10 @@
 import React from 'react';
-import { FORMSPREE_ENDPOINT } from '../constants';
 
-const Contact: React.FC = () => {
+type ContactProps = {
+  formspreeEndpoint: string;
+};
+
+const Contact: React.FC<ContactProps> = ({ formspreeEndpoint }) => {
   return (
     <section className="py-20 md:py-24 bg-white rounded-2xl shadow-sm">
       <div className="text-center mb-12">
@@ -9,7 +12,7 @@ const Contact: React.FC = () => {
         <p className="mt-4 text-lg text-slate-600">Have a question or want to work together? Drop me a line!</p>
       </div>
       <div className="max-w-xl mx-auto">
-        <form action={FORMSPREE_ENDPOINT} method="POST" className="space-y-6">
+        <form action={formspreeEndpoint} method="POST" className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
               Full Name

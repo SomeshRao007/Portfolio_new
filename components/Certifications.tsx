@@ -1,7 +1,11 @@
 import React from 'react';
-import { CERTIFICATIONS_DATA } from '../constants';
+import type { Certification } from '../types';
 
-const Certifications: React.FC = () => {
+type CertificationsProps = {
+  data: Certification[];
+};
+
+const Certifications: React.FC<CertificationsProps> = ({ data }) => {
   return (
     <section className="py-20 md:py-24">
       <div className="text-center mb-16">
@@ -9,7 +13,7 @@ const Certifications: React.FC = () => {
         <p className="mt-4 text-lg text-slate-600">My commitment to continuous learning and professional development.</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {CERTIFICATIONS_DATA.map((cert) => (
+        {data.map((cert) => (
           <a
             key={cert.title}
             href={cert.link}

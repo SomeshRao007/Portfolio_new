@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { PERSONAL_INFO } from '../constants';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon, XMarkIcon, UserCircleIcon, ArrowRightOnRectangleIcon, Cog6ToothIcon } from '@heroicons/react/24/solid';
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  name: string;
+  isAuthenticated: boolean;
+  onLogout: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ name, isAuthenticated, onLogout }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -23,6 +28,7 @@ const Header: React.FC = () => {
     { href: '#skills', label: 'Skills' },
     { href: '#timeline', label: 'Timeline' },
     { href: '#projects', label: 'Projects' },
+    { href: '#certifications', label: 'Certifications' },
     { href: '#testimonials', label: 'Testimonials' },
     { href: '#learning', label: 'Learning' },
     { href: '#contact', label: 'Contact' },
@@ -38,9 +44,9 @@ const Header: React.FC = () => {
         <div className="container mx-auto px-4 md:px-8">
           <div className="flex justify-between items-center h-20">
             <a href="#home" className="text-2xl font-bold text-blue-600">
-              {PERSONAL_INFO.name}
+              {name}
             </a>
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -50,6 +56,24 @@ const Header: React.FC = () => {
                   {link.label}
                 </a>
               ))}
+               <div className="h-6 w-px bg-slate-300" />
+              {isAuthenticated ? (
+                  <>
+                     <a href="#admin" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 font-medium transition-colors">
+                        <Cog6ToothIcon className="w-5 h-5"/>
+                        <span>Admin Panel</span>
+                    </a>
+                    <button onClick={onLogout} className="flex items-center space-x-2 text-slate-600 hover:text-red-600 font-medium transition-colors">
+                        <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                        <span>Logout</span>
+                    </button>
+                  </>
+              ) : (
+                <a href="#login" className="flex items-center space-x-2 text-slate-600 hover:text-blue-600 font-medium transition-colors">
+                    <UserCircleIcon className="w-5 h-5"/>
+                    <span>Admin Login</span>
+                </a>
+              )}
             </nav>
             <div className="md:hidden">
                 <button

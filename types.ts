@@ -1,19 +1,17 @@
 // Fix: Import `ComponentType` from 'react' to resolve the namespace error.
 import type { ComponentType } from 'react';
 
-export enum SkillCategory {
-  CLOUD = 'Cloud Platform',
-  DEVOPS = 'DevOps',
-  MONITORING = 'Monitoring',
-  AIML = 'AI/ML',
-  WEB = 'Web Development',
-  PROGRAMMING = 'Programming & Databases',
-}
+// The SkillCategory enum is removed and replaced with a more flexible interface
+// to allow adding/editing categories in the admin panel.
 
 export interface Skill {
   name: string;
-  category: SkillCategory;
-  icon: ComponentType<{ className?: string }>;
+  icon: string; // Will now store a base64 data URL for uploaded images
+}
+
+export interface SkillCategory {
+  name: string;
+  skills: Skill[];
 }
 
 export interface Certification {
@@ -45,7 +43,7 @@ export interface Project {
   description: string;
   imageUrl: string;
   githubUrl: string;
-  liveUrl?: string;
+  // liveUrl has been removed as per the user request.
 }
 
 export interface Testimonial {

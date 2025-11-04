@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import { TIMELINE_DATA } from '../constants';
+import React, { useState, useMemo } from 'react';
 import type { TimelineEvent } from '../types';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+
+type TimelineProps = {
+  data: TimelineEvent[];
+};
 
 const TimelineModal: React.FC<{ event: TimelineEvent; onClose: () => void }> = ({ event, onClose }) => {
   return (
@@ -15,7 +18,7 @@ const TimelineModal: React.FC<{ event: TimelineEvent; onClose: () => void }> = (
           <XMarkIcon className="w-6 h-6" />
         </button>
         <div>
-          <p className="text-blue-500 font-semibold mb-2">{event.date}</p>
+          <p className="text-blue-500 font-semibold mb-2">{new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
           <h3 className="text-2xl font-bold text-slate-800 mb-4">{event.title}</h3>
           <p className="text-slate-600 leading-relaxed">{event.fullDescription}</p>
         </div>
@@ -33,9 +36,13 @@ const TimelineModal: React.FC<{ event: TimelineEvent; onClose: () => void }> = (
   );
 };
 
-const Timeline: React.FC = () => {
+const Timeline: React.FC<TimelineProps> = ({ data }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
+
+  const sortedData = useMemo(() => {
+    return [...data].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  }, [data]);
 
   const handleReadMore = (event: TimelineEvent) => {
     setSelectedEvent(event);
@@ -59,7 +66,7 @@ const Timeline: React.FC = () => {
         <div className="absolute left-4 md:left-1/2 top-0 h-full w-0.5 bg-blue-200 -translate-x-1/2"></div>
 
         <div className="space-y-12">
-          {TIMELINE_DATA.map((event, index) => (
+          {sortedData.map((event, index) => (
             <div key={index} className="relative pl-12 md:pl-0 md:grid md:grid-cols-2 md:gap-x-12 items-center group">
               {/* Dot */}
               <div className="absolute left-4 md:left-1/2 top-1 md:top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-4 border-blue-500 rounded-full"></div>
@@ -67,7 +74,7 @@ const Timeline: React.FC = () => {
               {/* Content */}
               <div className={`md:col-start-1 md:row-start-1 ${index % 2 === 0 ? 'md:col-start-2' : 'md:text-right'}`}>
                 <div className="bg-white p-6 rounded-xl shadow-md border border-slate-100">
-                  <p className="text-blue-500 font-semibold mb-1">{event.date}</p>
+                  <p className="text-blue-500 font-semibold mb-1">{new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</p>
                   <h3 className="text-xl font-bold text-slate-800 mb-2">{event.title}</h3>
                   <p className="text-slate-600">{event.description}</p>
                   <button onClick={() => handleReadMore(event)} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors text-sm font-semibold">
