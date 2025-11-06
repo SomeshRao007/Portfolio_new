@@ -125,18 +125,21 @@ const TIMELINE_DATA: TimelineEvent[] = [
     title: 'DevOps Engineer at Cloudpepper',
     description: 'I have extensive experience managing and automating cloud infrastructure on AWS and OVH to ensure seamless platform operations...',
     fullDescription: 'As a DevOps Engineer at Cloudpepper, I architected and maintained scalable, high-availability infrastructure on AWS and OVH. My key responsibilities included implementing CI/CD pipelines using Jenkins and GitHub Actions, containerizing applications with Docker, and orchestrating them with Kubernetes. I also led the charge on infrastructure as code (IaC) using Terraform, which standardized environments and reduced manual setup time by over 60%.',
+    icon: 'work',
   },
   {
     date: '2024-04-01',
     title: 'Intern at Pearlthoughts',
     description: 'I drove a 40% reduction in deployment time and costs by engineering automated workflows on AWS, which also enhanced collaboration efficiency across three key departments...',
     fullDescription: 'During my internship at Pearlthoughts, I focused on optimizing cloud operations. I successfully engineered automated workflows using AWS Lambda and Step Functions, which led to a 40% reduction in both deployment time and operational costs. This initiative significantly improved inter-departmental collaboration by providing a unified and efficient deployment strategy. I also gained hands-on experience with monitoring tools like CloudWatch and Prometheus.',
+    icon: 'work',
   },
   {
     date: '2023-11-01',
     title: 'International DSAI Conference',
     description: 'Presented my Masters Research work at International Conference on Data Science & Artificial Intelligence...',
     fullDescription: 'I had the privilege of presenting my master\'s thesis research at the International Conference on Data Science & Artificial Intelligence. My work, titled "Efficient Latent Space Representations for Anomaly Detection in Time-Series Data," explored novel deep learning architectures for unsupervised learning. The presentation was well-received and sparked engaging discussions with leading researchers in the field, further solidifying my passion for applying AI to solve real-world problems.',
+    icon: 'education',
   },
 ];
 

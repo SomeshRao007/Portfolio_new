@@ -31,6 +31,7 @@ export interface TimelineEvent {
   title: string;
   description: string;
   fullDescription: string;
+  icon: 'work' | 'education' | 'milestone';
 }
 
 export interface LearningItem {

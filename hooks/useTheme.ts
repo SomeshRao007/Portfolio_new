@@ -16,7 +16,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (storedTheme === 'dark' || storedTheme === 'light') {
         return storedTheme;
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      // Default to light mode if no theme is stored.
+      return 'light';
     }
     return 'light';
   });
