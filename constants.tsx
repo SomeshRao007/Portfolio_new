@@ -170,6 +170,13 @@ const PROJECTS_DATA: Project[] = [
     githubUrl: '#',
   },
   {
+    title: 'Terminal 2048',
+    description: 'A playable 2048 game with a retro terminal theme. Click play to try it out!',
+    imageUrl: '/assets/images/project-2048.png',
+    githubUrl: '#',
+    interactiveComponent: 'Game2048',
+  },
+  {
     title: 'Data Visualization Dashboard',
     description: 'An internal tool for visualizing complex business metrics using D3.js and React.',
     imageUrl: '/assets/images/flag.jpeg',

@@ -41,9 +41,9 @@ export interface LearningItem {
 export interface Project {
   title: string;
   description: string;
-  imageUrl: string;
-  githubUrl: string;
-  // liveUrl has been removed as per the user request.
+  imageUrl?: string;
+  githubUrl?: string;
+  interactiveComponent?: 'Game2048';
 }
 
 export interface Testimonial {
