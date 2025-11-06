@@ -13,6 +13,7 @@ import Contact from './components/Contact';
 import Testimonials from './components/Testimonials';
 import { INITIAL_DATA, createChatbotSystemInstruction } from './constants';
 import { ThemeProvider } from './hooks/useTheme';
+import SkillOfTheDay from './components/SkillOfTheDay';
 
 const App: React.FC = () => {
   const portfolioData = INITIAL_DATA;
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           <div id="home" className="pt-20 -mt-20">
             <Hero data={portfolioData.personalInfo} />
           </div>
+          <SkillOfTheDay data={portfolioData.skills} />
           <Stats data={portfolioData.stats} />
           <div id="skills" className="pt-20 -mt-20">
             <Skills data={portfolioData.skills} />
