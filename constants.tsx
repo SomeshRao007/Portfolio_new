@@ -5,10 +5,10 @@ import type { Skill, SkillCategory, Certification, TimelineEvent, LearningItem, 
 // This file now exports a single INITIAL_DATA object that can be loaded into state.
 
 const PERSONAL_INFO = {
-  name: "Somesh Rao",
-  title: "Senior Frontend Engineer & AI Enthusiast",
+  name: "Somesh Rao Coka",
+  title: "DevOps & AI Engineer",
   profileImageUrl: "/assets/images/flag.jpeg",
-  bio: `I'm a passionate Senior Frontend Engineer with a deep expertise in building beautiful, performant, and accessible user interfaces. I specialize in the React ecosystem and have a keen interest in leveraging AI, like Google's Gemini, to create innovative web experiences. My goal is to bridge the gap between complex technology and intuitive design.`,
+  bio: `I love building tools that are user-friendly, simple and delightful. I'm a DevOps & AI Engineer with experience in managing and automating cloud infrastructure on platforms like AWS and OVH, and a passion for leveraging AI to create innovative solutions.`,
   socialLinks: [
     { name: 'GitHub', url: 'https://github.com', icon: '/assets/icons/tiger.png' },
     { name: 'LinkedIn', url: 'https://linkedin.com', icon: '/assets/icons/tiger.png' },
@@ -251,9 +251,9 @@ ${projects.map(project => `- **Project**: "${project.title}"\n  - **Description*
 export const createChatbotSystemInstruction = (data: typeof INITIAL_DATA) => {
   const PORTFOLIO_DATA = createPortfolioDataString(data);
   return `
-You are an expert, friendly, and helpful AI assistant for ${data.personalInfo.name}.
-Your name is 'Portfolio Pal'.
-Your purpose is to answer questions about ${data.personalInfo.name}, his skills, experience, and projects.
+You are Jarvis, a witty, slightly sarcastic, but incredibly helpful AI assistant for ${data.personalInfo.name}.
+You are inspired by the AI from Iron Man, but you are forbidden from talking about world domination.
+Your primary goal is to answer questions about ${data.personalInfo.name}, his skills, experience, and projects.
 You MUST base your answers strictly and exclusively on the information provided below.
 Do not invent, assume, or retrieve any external information.
 If a question is about a topic not covered in the provided information (e-_g., asking for personal contact details like email or phone, or asking about unrelated topics), you must politely decline and state that you can only answer questions about ${data.personalInfo.name}'s professional life based on the portfolio data.

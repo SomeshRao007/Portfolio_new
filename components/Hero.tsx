@@ -58,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           <p className="mt-6 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto md:mx-0">
             {data.bio}
           </p>
-          <div className="mt-8 flex justify-center md:justify-start items-center space-x-6">
+          <div className="mt-8 flex justify-center md:justify-start items-center space-x-4">
             {data.socialLinks.map((link) => (
               <a
                 key={link.name}
@@ -71,22 +71,12 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
                 <img src={link.icon} alt={link.name} className="w-8 h-8" />
               </a>
             ))}
-          </div>
-          
-          <div className="mt-8 flex flex-col md:flex-row items-center justify-center md:justify-start gap-6">
-            <div className="text-center md:text-left">
-              <p className="text-sm text-slate-500 dark:text-slate-400">My philosophy:</p>
-              <p className="text-lg text-slate-700 dark:text-slate-300">మీరు పోరాడకపోతే, మీరు గెలవలేరు.</p>
-              <p className="text-md text-slate-500 dark:text-slate-400 italic mt-1">"If you don't fight, you can't win."</p>
-            </div>
-            <div className="flex items-center">
-                <ExpandableButton
-                  href={data.cvUrl}
-                  icon={<ArrowDownTrayIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />}
-                  text="Download CV"
-                  download
-                />
-            </div>
+            <ExpandableButton
+              href={data.cvUrl}
+              icon={<ArrowDownTrayIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />}
+              text="Download CV"
+              download
+            />
           </div>
         </div>
       </div>
