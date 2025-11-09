@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/fetch-strapi-data.mjs",
+    "fetch-data": "node scripts/fetch-strapi-data.mjs",
+    "prebuild": "npm run fetch-data",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
